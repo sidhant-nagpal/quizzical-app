@@ -72,11 +72,11 @@ h1 {
 }
 
 .qna {
-  width: 640px;
+  width: 645px;
   border-bottom: 0.794239px solid #DBDEF0;;
 }
 
-.questions {
+.question {
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
@@ -86,6 +86,7 @@ h1 {
 
 .options {
   display: flex;
+  margin-bottom: 15px;
 }
 
 .option {
@@ -93,19 +94,19 @@ h1 {
   min-width: 60px;
   font-family: 'Inter';
   font-weight: 500;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 14px;
   text-align: center;
   color: #293264;
   border: 0.771045px solid #4D5B9E;
   border-radius: 7.71045px;
-  padding: 5px;
-  margin-bottom: 15px;
+  padding: 5px 10px;
+  cursor: pointer;
   /* margin-left: 13px; */
 }
 
 .option + .option {
-  margin-left: 13px;
+  margin-left: 15px;
 }
 
 /* .option:first-of-type {

@@ -1,6 +1,6 @@
 import React  from "react"
 import Start from "./Start.js"
-import Questions from "./Questions.js"
+import Quiz from "./Quiz.js"
 
 export default function App() {
 
@@ -12,9 +12,9 @@ export default function App() {
 
     return (
         <main>
-            {!started?
+            {started?
             <Start start={start} />:
-            <Questions/>}
+            <Quiz/>}
         </main>
     )
 }

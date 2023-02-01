@@ -1,9 +1,11 @@
 import React from "react";
-import {nanoid} from "nanoid"
+import Question from "./Question";
+import {nanoid} from "nanoid";
 
-export default function Questions() {
+export default function Quiz () {
 
     const [questions, setQuestions] = React.useState([])
+    const [selected, setSelected] = React.useState([false, false, false, false, false])
 
     React.useEffect(() => {
         fetch("https://opentdb.com/api.php?amount=5")
@@ -11,19 +13,25 @@ export default function Questions() {
             .then(data => setQuestions(data.results))
     }, [])
 
-    console.log(questions)
+    // console.log(questions)
 
-    const dataElements = questions.map(data => 
-        <div className="qna" key={nanoid()}>
-            <p className="questions">
-                {decode(data.question)}
-            </p>
-            <div className="options">
-                {optionsArr(data).map(
-                    opt => <p key={nanoid()} className="option">{decode(opt)}</p>
-                )}
-            </div>
-        </div>
+    function toggleSelected(index) {
+        setSelected(prevArr => {
+            const newArr = prevArr
+            newArr[index] = !newArr[index]
+            return newArr
+        })
+    }
+
+    const dataElements = questions.map((data, index) => 
+        <Question
+            key={nanoid()}
+            question={data.question} 
+            options={optionsArr(data)}
+            correctAns={data.correct_answer}
+            selected={selected[index]}
+            toggle={() => toggleSelected(index)}
+        />
     )
 
     function optionsArr(data) {
@@ -32,18 +40,10 @@ export default function Questions() {
         options.sort(() => Math.random() - 0.5)
         return options
     }
-
-    function decode(html) {
-        var txt = document.createElement("textarea");
-        txt.innerHTML = html;
-        return txt.value;
-    }
-
-    // {if(questions.length != 0) console.log(questions.map(data => decode(data.question)))}
     
     return (
         <div>
-            {questions.length === 0 ?
+            {questions.length === 0?
                 <></>:
                 <div className="quiz">
                     {dataElements}
