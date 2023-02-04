@@ -2,31 +2,31 @@ import React from "react";
 
 export default function Option(props) {
 
-    const [option, setOption] = React.useState({
-        value: props.value,
-        isHeld: false
-    })
+    // const option = {
+    //     value: props.value,
+    //     isHeld: false
+    // }
 
     const styles = {
-        backgroundColor: option.isHeld? "#D6DBF5": "",
-        borderColor: option.isHeld ? "transparent": ""
+        backgroundColor: props.optionIndex === props.held ? "#D6DBF5": "",
+        borderColor: props.optionIndex === props.held ? "transparent": "",
     }
 
     function select() {
-        setOption(prevVal => ({
-            ...prevVal,
-            isHeld: !prevVal.isHeld
-        }))
+        // option.isHeld = !option.isHeld
+        props.holdOption(props.quesIndex, 
+            props.held === -1 ? props.optionIndex : -1
+        )
         props.toggle()
     }
 
     return (
         <p 
         className="option"
-        onClick={select}
+        onClick={props.optionIndex === props.held || !props.selected ? select : undefined}
         style={styles}
         >
-            {option.value}
+            {props.value}
         </p>
     )
 }

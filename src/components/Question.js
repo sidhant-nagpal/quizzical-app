@@ -12,23 +12,23 @@ export default function Question(props) {
 
     return (
         <div className="qna">
-            <p className="question">
+            <p 
+            className="question" 
+            >
                 {decode(props.question)}
             </p>
+            {/* <p>{decode(props.selected)}</p> */}
             <div className="options">
-                {props.options.map(opt => 
-                    // <p 
-                    // key ={nanoid()}
-                    // className="option"
-                    // onClick={props.toggle}
-                    // // isHeld={false}
-                    // >
-                    //     {decode(opt)}
-                    // </p>
+                {props.options.map((opt, index) => 
                     <Option 
                         key={nanoid()}
                         value={decode(opt)}
                         toggle={props.toggle}
+                        optionIndex={index}
+                        held={props.held}
+                        selected={props.selected}
+                        holdOption={props.holdOption}
+                        quesIndex={props.quesIndex}
                     />
                 )}
             </div>
