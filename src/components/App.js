@@ -12,7 +12,7 @@ export default function App() {
 
     return (
         <main>
-            {started?
+            {!started?
             <Start start={start} />:
             <Quiz/>}
         </main>

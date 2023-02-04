@@ -17,18 +17,18 @@ export default function Question(props) {
             >
                 {decode(props.question)}
             </p>
-            {/* <p>{decode(props.selected)}</p> */}
             <div className="options">
                 {props.options.map((opt, index) => 
                     <Option 
                         key={nanoid()}
                         value={decode(opt)}
-                        toggle={props.toggle}
                         optionIndex={index}
                         held={props.held}
                         selected={props.selected}
                         holdOption={props.holdOption}
                         quesIndex={props.quesIndex}
+                        check={props.check}
+                        correctAns={props.correctAns}
                     />
                 )}
             </div>
