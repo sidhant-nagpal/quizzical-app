@@ -9,7 +9,6 @@ export default function Quiz () {
     const [options, setOptions] = React.useState(() => [])
     const [held, setHeld] = React.useState(() => ["","","","",""])
     const [check, setCheck] = React.useState(() => false)
-    const [score, setScore] = React.useState(() => 0)
     const [playAgain, setPlayAgain] = React.useState(() => false)
     const [showAlert, setShowAlert] = React.useState(() => false)
 
@@ -22,17 +21,15 @@ export default function Quiz () {
             })
     }, [playAgain])
 
-    React.useEffect(() => {
-        setScore(() => {
-            let count = 0
+    function score() {
+        let count = 0
             questions.map((data, index) => {
                 if(data.correct_answer === held[index]) {
                     count++
                 }
             })
-            return count
-        })
-    }, [check])
+        return count
+    }
 
     function toggleHeld(index, value) {
         setHeld(prevArr => prevArr.map(
@@ -57,7 +54,7 @@ export default function Quiz () {
         setOptions([])
         setHeld(["","","","",""])
         setCheck(false)
-        setScore(0)
+        setShowAlert(false)
         setPlayAgain(!playAgain)
     }
 
@@ -67,7 +64,6 @@ export default function Quiz () {
             question={data.question} 
             options={options[index]}
             correctAns={data.correct_answer}
-            selected={held[index]}
             held={held[index]}
             holdOption={toggleHeld}
             quesIndex={index}
@@ -83,7 +79,7 @@ export default function Quiz () {
                     {dataElements}
                     {check?
                     <div className="results">
-                        <p className="score">You scored {score}/5 correct answers</p>
+                        <p className="score">You scored {score()}/5 correct answers</p>
                         <button 
                             className="play-again-btn"
                             onClick={() => togglePlayAgain()}

@@ -22,9 +22,7 @@ export default function Question(props) {
                     <Option 
                         key={nanoid()}
                         value={decode(opt)}
-                        optionIndex={index}
                         held={props.held}
-                        selected={props.selected}
                         holdOption={props.holdOption}
                         quesIndex={props.quesIndex}
                         check={props.check}
